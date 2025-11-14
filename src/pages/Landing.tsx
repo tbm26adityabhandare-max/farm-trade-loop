@@ -1,12 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sprout, Users, TrendingUp, Shield, Link as LinkIcon, CheckCircle2 } from "lucide-react";
+import { Sprout, Users, TrendingUp, Shield, Link as LinkIcon, CheckCircle2, ClipboardList, Gavel, Truck, Store, FileCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import { NavLink } from "@/components/NavLink";
+import { SectionHeading } from "@/components/SectionHeading";
+import { StepCard } from "@/components/StepCard";
+import { BenefitCard } from "@/components/BenefitCard";
+import { StatCard } from "@/components/StatCard";
 
 const Landing = () => {
   const features = [
     {
-      icon: Sprout,
+      icon: Store,
       title: "Direct Market Access",
       description: "Connect directly with large buyers without middlemen. List your produce and get real-time bids.",
     },
@@ -21,10 +26,17 @@ const Landing = () => {
       description: "Trade with confidence. All buyers are KYC-verified including Reliance Fresh, BigBasket, ITC, and more.",
     },
     {
-      icon: LinkIcon,
+      icon: FileCheck,
       title: "Full Traceability",
       description: "Complete transparency from farm to buyer. Track every step of your produce journey.",
     },
+  ];
+
+  const stats = [
+    { value: "15%", label: "Average Price Increase" },
+    { value: "24 hrs", label: "Bid Response Time" },
+    { value: "100+", label: "Verified Buyers" },
+    { value: "98%", label: "Successful Transaction Rate" },
   ];
 
   const benefits = [
@@ -50,12 +62,12 @@ const Landing = () => {
               <Link to="#features" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Features
               </Link>
-              <Link to="#how-it-works" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              <NavLink to="/how-it-works" className="text-sm font-medium text-foreground hover:text-primary transition-colors" activeClassName="text-primary">
                 How It Works
-              </Link>
-              <Link to="#benefits" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              </NavLink>
+              <NavLink to="/benefits" className="text-sm font-medium text-foreground hover:text-primary transition-colors" activeClassName="text-primary">
                 Benefits
-              </Link>
+              </NavLink>
             </nav>
             <div className="flex items-center gap-3">
               <Link to="/login">
@@ -144,27 +156,20 @@ const Landing = () => {
       {/* Features Section */}
       <section id="features" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Why Choose KrishiLink?
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Transparent, efficient, and farmer-first marketplace that bridges the gap between producers and buyers.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <SectionHeading 
+            title="Why Choose KrishiLink?" 
+            subtitle="Transparent, efficient, and farmer-first marketplace that bridges the gap between producers and buyers."
+          />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {features.map((feature, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <feature.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                  <CardDescription className="text-sm leading-relaxed">
-                    {feature.description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <BenefitCard key={index} {...feature} />
+            ))}
+          </div>
+          
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {stats.map((stat, index) => (
+              <StatCard key={index} {...stat} />
             ))}
           </div>
         </div>
@@ -173,42 +178,29 @@ const Landing = () => {
       {/* How It Works */}
       <section id="how-it-works" className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              How It Works
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Simple steps to start selling your produce at better prices
-            </p>
-          </div>
+          <SectionHeading 
+            title="How It Works" 
+            subtitle="Simple steps to start selling your produce at better prices"
+          />
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold">
-                1
-              </div>
-              <h3 className="text-xl font-semibold">Register & List</h3>
-              <p className="text-muted-foreground">
-                Create your account, complete KYC, and list your produce with quality grading and images.
-              </p>
-            </div>
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold">
-                2
-              </div>
-              <h3 className="text-xl font-semibold">Receive Bids</h3>
-              <p className="text-muted-foreground">
-                Verified buyers place competitive bids. View all offers in real-time and choose the best one.
-              </p>
-            </div>
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold">
-                3
-              </div>
-              <h3 className="text-xl font-semibold">Deliver & Get Paid</h3>
-              <p className="text-muted-foreground">
-                Schedule pickup, deliver to buyer, and receive secure payment directly to your account.
-              </p>
-            </div>
+            <StepCard 
+              icon={ClipboardList}
+              step={1}
+              title="Register & List"
+              description="Create your account, complete KYC, and list your produce with quality grading and images."
+            />
+            <StepCard 
+              icon={Gavel}
+              step={2}
+              title="Receive Bids"
+              description="Verified buyers place competitive bids. View all offers in real-time and choose the best one."
+            />
+            <StepCard 
+              icon={Truck}
+              step={3}
+              title="Deliver & Get Paid"
+              description="Schedule pickup, deliver to buyer, and receive secure payment directly to your account."
+            />
           </div>
         </div>
       </section>
