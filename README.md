@@ -1,73 +1,24 @@
-# Welcome to your Lovable project
+# KrishiLink
 
-## Project info
+**Farm-to-business auction marketplace.** Farmers list their harvest from a phone; KYC-verified mills, exporters and retailers bid openly; the farmer accepts the best offer and gets paid through escrow.
 
-**URL**: https://lovable.dev/projects/15056f44-0964-4084-a53c-e1d0c617eafa
+**Live demo:** https://claude.ai/artifact/MRHWPAf3KDz4AotsVecQk9
 
-## How can I edit this code?
+## The problem
+Farmers selling through mandis depend on commission agents who set the price. KrishiLink replaces that with open, transparent bidding.
 
-There are several ways of editing your application.
+## Features
+- **Live auctions**: verified buyers bid on graded lots for 24 hours, every bid visible to the farmer
+- **Price check tool**: compares mandi sale (after arhtiya commission) with an open auction (after a 1.5% fee)
+- **Trust layer**: buyer KYC (GST, PAN, bank), escrow before pickup, third-party grading, calibrated weighing at the farm gate
+- **Built for Bharat**: bilingual UI (English and Hindi), designed for multilingual and missed-call listing
+- **Two-sided**: flows for farmers and FPOs, and for mills, exporters and retailers
 
-**Use Lovable**
+## Tech
+Single-file HTML, CSS and vanilla JavaScript. No build step. Demo data is illustrative, not live Agmarknet feeds.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/15056f44-0964-4084-a53c-e1d0c617eafa) and start prompting.
+## Run locally
+Open `index.html` in any browser.
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/15056f44-0964-4084-a53c-e1d0c617eafa) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Author
+Aditya Bhandare | [LinkedIn](https://www.linkedin.com/in/aditya-bhandare/)

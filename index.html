@@ -1,27 +1,537 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KrishiLink - India's Farm-to-Business Marketplace</title>
-    <meta name="description" content="Connect farmers with verified buyers through transparent bidding. Better prices, direct access, zero middlemen." />
-    <meta name="author" content="KrishiLink" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KrishiLink | Sell your harvest to the highest verified bidder</title>
+<meta name="description" content="Farmers list a lot, verified buyers bid in the open, payment lands in 48 hours through escrow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Hind:wght@400;500;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo:#1E2A63; --indigo-2:#2F3F8C; --turmeric:#E3A21A; --paddy:#2F7A3E; --chilli:#B8352A;
+  --bg:#F5F6F2; --surface:#FFFFFF; --ink:#1A1D2B; --muted:#5B6072; --rule:#D9DBD2; --board:#1E2A63; --board-ink:#F5F6F2;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Hind", "Segoe UI", system-ui, sans-serif;
+  --deva:"Tiro Devanagari Hindi", "Noto Sans Devanagari", serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#12152A; --surface:#1A1E38; --ink:#ECEDF3; --muted:#A3A8BE; --rule:#2E3353; --board:#0C0F22; --board-ink:#ECEDF3; --indigo:#8E9BE8; --indigo-2:#A9B4F0; --paddy:#5DB26D;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12152A; --surface:#1A1E38; --ink:#ECEDF3; --muted:#A3A8BE; --rule:#2E3353; --board:#0C0F22; --board-ink:#ECEDF3; --indigo:#8E9BE8; --indigo-2:#A9B4F0; --paddy:#5DB26D;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--turmeric);outline-offset:2px;border-radius:4px}
+.wrap{width:min(1180px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;letter-spacing:-0.02em}
+.deva{font-family:var(--deva);font-weight:400}
 
-    <meta property="og:title" content="KrishiLink - India's Farm-to-Business Marketplace" />
-    <meta property="og:description" content="Connect farmers with verified buyers through transparent bidding. Better prices, direct access, zero middlemen." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem}
+.logo{display:flex;align-items:center;gap:.6rem;font:800 1.3rem var(--display);text-decoration:none;color:var(--indigo)}
+.logo svg{width:30px;height:30px}
+.nav nav{display:flex;gap:1.6rem;font-weight:500}
+.nav nav a{text-decoration:none;color:var(--muted)}
+.nav nav a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font:600 1rem var(--body);padding:.75rem 1.25rem;border-radius:999px;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--turmeric);color:#1A1D2B}
+.btn-primary:hover{background:#F0B23A}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-ghost:hover{background:var(--ink);color:var(--bg)}
+@media (max-width:760px){.nav nav{display:none}}
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@KrishiLink" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+/* hero */
+.hero{padding:clamp(2.5rem,6vw,5rem) 0 4rem}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+@media (max-width:920px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(2.6rem,6.2vw,4.9rem);font-weight:800;color:var(--indigo)}
+.hero h1 .deva{display:block;font-size:.42em;color:var(--muted);letter-spacing:0;margin-top:.9rem;line-height:1.3}
+.hero p.lede{font-size:1.2rem;max-width:34ch;color:var(--muted);margin:1.5rem 0 2rem}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:.75rem}
+.proof{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--rule)}
+.proof div{font-size:.95rem;color:var(--muted);max-width:14ch;line-height:1.35}
+.proof strong{display:block;font:800 1.6rem var(--display);color:var(--ink)}
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+/* live board */
+.board{background:var(--board);color:var(--board-ink);border-radius:22px;padding:1.5rem;position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(30,42,99,.55)}
+.board::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(255,255,255,.035) 38px 39px);pointer-events:none}
+.board-top{display:flex;justify-content:space-between;align-items:center;font-size:.95rem;opacity:.85;position:relative}
+.live{display:inline-flex;align-items:center;gap:.45rem;color:var(--turmeric);font-weight:600}
+.live i{width:9px;height:9px;border-radius:50%;background:var(--turmeric);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(227,162,26,.7)}70%{box-shadow:0 0 0 10px rgba(227,162,26,0)}100%{box-shadow:0 0 0 0 rgba(227,162,26,0)}}
+.lot-name{font:800 1.9rem var(--display);margin:1.1rem 0 .15rem;position:relative}
+.lot-meta{opacity:.75;position:relative}
+.bidnum{position:relative;display:flex;align-items:baseline;gap:.6rem;margin:1.4rem 0 .3rem}
+.bidnum strong{font:800 clamp(3rem,7vw,4.4rem)/1 var(--display);font-variant-numeric:tabular-nums;color:var(--turmeric);transition:color .3s}
+.bidnum strong.flash{color:#fff}
+.bidnum span{opacity:.7}
+.vs{position:relative;display:flex;gap:1rem;flex-wrap:wrap;font-size:.98rem}
+.vs b{color:#7FD08D}
+.feed{position:relative;list-style:none;margin:1.3rem 0 0;padding:0;border-top:1px solid rgba(255,255,255,.14)}
+.feed li{display:grid;grid-template-columns:1fr auto auto;gap:1rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.97rem}
+.feed li:first-child{animation:slidein .45s ease-out}
+.feed li .t{opacity:.55;font-variant-numeric:tabular-nums}
+.feed li .amt{font-weight:600;font-variant-numeric:tabular-nums}
+@keyframes slidein{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.timer{font-variant-numeric:tabular-nums;font-weight:600}
+
+/* sections */
+section{padding:clamp(3.5rem,7vw,6rem) 0}
+.sec-head{max-width:40rem;margin-bottom:2.5rem}
+.sec-head h2{font-size:clamp(2rem,4vw,3rem);color:var(--indigo)}
+.sec-head p{color:var(--muted);font-size:1.12rem;margin:.8rem 0 0}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:3px solid var(--indigo)}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{padding:1.5rem 1.5rem 1.5rem 0;position:relative}
+.step .n{font:800 3rem/1 var(--display);color:var(--turmeric)}
+.step h3{font-size:1.3rem;margin:.8rem 0 .5rem}
+.step p{margin:0;color:var(--muted);font-size:1rem}
+
+/* market */
+.market{background:var(--surface);border-block:1px solid var(--rule)}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+.chip{font:500 .95rem var(--body);padding:.45rem 1rem;border-radius:999px;border:1.5px solid var(--rule);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--indigo);border-color:var(--indigo);color:var(--bg)}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th{font:600 .9rem var(--body);color:var(--muted);text-align:left;padding:.75rem .75rem;border-bottom:2px solid var(--ink)}
+td{padding:1rem .75rem;border-bottom:1px solid var(--rule);vertical-align:middle;font-variant-numeric:tabular-nums}
+td.crop b{display:block;font-family:var(--display);font-size:1.1rem}
+td.crop span{color:var(--muted);font-size:.92rem}
+.grade{display:inline-block;font-weight:600;font-size:.85rem;padding:.15rem .55rem;border-radius:6px;background:color-mix(in srgb,var(--paddy) 15%,transparent);color:var(--paddy)}
+.up{color:var(--paddy);font-weight:600}
+td.bid b{font-size:1.15rem}
+tr.bumped td.bid b{animation:bump .8s ease-out}
+@keyframes bump{0%{color:var(--turmeric)}100%{color:inherit}}
+.bidbtn{padding:.5rem 1rem;font-size:.95rem}
+.demo-note{font-size:.9rem;color:var(--muted);margin-top:1rem}
+
+/* dialog */
+dialog{border:none;border-radius:20px;padding:0;max-width:440px;width:calc(100% - 2rem);background:var(--surface);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(18,21,42,.55)}
+.dlg{padding:1.75rem}
+.dlg h3{font-size:1.5rem}
+.dlg p{color:var(--muted);margin:.4rem 0 1.2rem}
+.field label{display:block;font-weight:600;margin-bottom:.35rem}
+.field input,.field select{width:100%;font:500 1.15rem var(--body);padding:.75rem .9rem;border-radius:12px;border:1.5px solid var(--rule);background:var(--bg);color:var(--ink)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--indigo)}
+.err{color:var(--chilli);font-size:.95rem;min-height:1.4em;margin:.4rem 0 0}
+.dlg .row{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1rem}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+.calc form{display:grid;gap:1.1rem}
+.result{border:2px solid var(--indigo);border-radius:22px;padding:1.75rem}
+.bar-row{margin:1rem 0}
+.bar-row .lab{display:flex;justify-content:space-between;font-weight:500;margin-bottom:.35rem;font-variant-numeric:tabular-nums}
+.bar{height:16px;border-radius:8px;background:var(--rule);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:8px;transition:width .5s ease}
+.gain{font:800 clamp(2.4rem,5vw,3.4rem)/1 var(--display);color:var(--paddy);margin-top:1.2rem;font-variant-numeric:tabular-nums}
+.gain-lab{color:var(--muted)}
+
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem 4rem}
+@media (max-width:720px){.trust{grid-template-columns:1fr}}
+.trust h3{font-size:1.35rem;margin-bottom:.5rem;display:flex;gap:.7rem;align-items:center}
+.trust h3 svg{flex:none;width:28px;height:28px;color:var(--turmeric)}
+.trust p{margin:0;color:var(--muted);max-width:44ch}
+
+/* roles */
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media (max-width:760px){.roles{grid-template-columns:1fr}}
+.role{border-radius:22px;padding:2rem}
+.role.farmer{background:var(--paddy);color:#fff}
+.role.buyer{background:var(--indigo-2);color:#fff}
+:root[data-theme="dark"] .role.buyer{background:#2F3F8C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .role.buyer{background:#2F3F8C}:root:not([data-theme="light"]) .role.farmer{background:#2F7A3E}}
+.role h3{font-size:1.9rem}
+.role ul{padding-left:1.1rem;margin:1rem 0 1.5rem}
+.role li{margin:.35rem 0}
+.role .btn{background:#fff;color:#1A1D2B}
+
+footer{padding:2.5rem 0;border-top:1px solid var(--rule);color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+
+.toast{position:fixed;left:50%;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,150%);background:var(--ink);color:var(--bg);padding:.85rem 1.3rem;border-radius:14px;font-weight:500;transition:transform .3s ease;z-index:50;max-width:calc(100% - 2rem)}
+.toast.show{transform:translate(-50%,0)}
+.theme-toggle{background:none;border:1.5px solid var(--rule);border-radius:999px;width:40px;height:40px;cursor:pointer;color:var(--ink);font-size:1.1rem}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="KrishiLink home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1E2A63"/><path d="M16 25V11M16 15c-3-4-7-4-7-4s0 5 7 6M16 15c3-4 7-4 7-4s0 5-7 6M16 20c-3-3-6-3-6-3s0 4 6 4.5M16 20c3-3 6-3 6-3s0 4-6 4.5" stroke="#E3A21A" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      KrishiLink
+    </a>
+    <nav aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#market">Live lots</a>
+      <a href="#calc">Price check</a>
+      <a href="#trust">Safety</a>
+    </nav>
+    <div style="display:flex;gap:.5rem;align-items:center">
+      <button class="theme-toggle" id="themeBtn" aria-label="Switch colour theme">◐</button>
+      <a class="btn btn-primary" href="#join">Sell a lot</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Sell your harvest to the highest verified bidder.
+          <span class="deva">अपनी फसल सीधे सबसे ऊँची बोली लगाने वाले खरीदार को बेचें।</span>
+        </h1>
+        <p class="lede">List your lot from your phone. Mills, exporters and retailers bid in the open. Money reaches your bank in 48 hours.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#join">List my crop</a>
+          <a class="btn btn-ghost" href="#market">See live lots</a>
+        </div>
+        <div class="proof">
+          <div><strong>8.4%</strong>average above mandi modal price</div>
+          <div><strong>48 hrs</strong>from sale to bank transfer</div>
+          <div><strong>1,200+</strong>KYC-verified buyers</div>
+        </div>
+      </div>
+
+      <div class="board" aria-label="Live auction preview" aria-live="polite">
+        <div class="board-top">
+          <span class="live"><i></i>Live auction</span>
+          <span>Closes in <span class="timer" id="heroTimer">14:32</span></span>
+        </div>
+        <div class="lot-name" id="heroCrop">Wheat HD-2967</div>
+        <div class="lot-meta" id="heroMeta">42 quintal, Grade A, Karnal, Haryana</div>
+        <div class="bidnum"><strong id="heroBid">₹2,612</strong><span>per quintal</span></div>
+        <div class="vs"><span>Karnal mandi today ₹2,425</span><b id="heroDiff">+7.7% for the farmer</b></div>
+        <ul class="feed" id="heroFeed"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>From field to payment in four steps</h2>
+        <p>No commission agent sets your price. Buyers compete for your lot, and you decide whether to sell.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>List your lot</h3><p>Add crop, quantity and village by voice or text. A field assayer grades the sample within a day.</p></div>
+        <div class="step"><div class="n">2</div><h3>Buyers bid openly</h3><p>Verified buyers see the grade report and bid for 24 hours. Every bid is visible to you.</p></div>
+        <div class="step"><div class="n">3</div><h3>Accept the best offer</h3><p>Take the top bid, or reject all of them and relist. No penalty either way.</p></div>
+        <div class="step"><div class="n">4</div><h3>Get paid in 48 hours</h3><p>The buyer pays into escrow before pickup. Funds release to your bank once weight is confirmed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="market" class="market">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Lots open for bidding</h2>
+        <p>Prices move as buyers bid. Try placing one.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter by crop type" id="filters">
+        <button class="chip" aria-pressed="true" data-f="all">All crops</button>
+        <button class="chip" aria-pressed="false" data-f="grain">Grains</button>
+        <button class="chip" aria-pressed="false" data-f="pulse">Pulses and oilseeds</button>
+        <button class="chip" aria-pressed="false" data-f="cash">Cotton and vegetables</button>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Crop and location</th><th>Quantity</th><th>Grade</th><th>Mandi rate</th><th>Top bid (₹/qtl)</th><th>Bids</th><th>Closes</th><th><span class="sr" style="position:absolute;left:-9999px">Action</span></th></tr></thead>
+          <tbody id="lots"></tbody>
+        </table>
+      </div>
+      <p class="demo-note">Demo data. Mandi rates are illustrative, not live Agmarknet feeds.</p>
+    </div>
+  </section>
+
+  <section id="calc">
+    <div class="wrap calc">
+      <div>
+        <div class="sec-head" style="margin-bottom:1.5rem">
+          <h2>What would your crop fetch?</h2>
+          <p>Compare selling at the mandi with an open auction, after our 1.5% fee.</p>
+        </div>
+        <form id="calcForm" onsubmit="return false">
+          <div class="field">
+            <label for="cCrop">Crop</label>
+            <select id="cCrop"></select>
+          </div>
+          <div class="field">
+            <label for="cQty">Quantity in quintal</label>
+            <input id="cQty" type="number" min="1" max="5000" value="50" inputmode="numeric">
+          </div>
+        </form>
+      </div>
+      <div class="result" aria-live="polite">
+        <div class="bar-row">
+          <div class="lab"><span>Mandi, after arhtiya commission</span><span id="rMandi">₹0</span></div>
+          <div class="bar"><i id="bMandi" style="background:var(--muted)"></i></div>
+        </div>
+        <div class="bar-row">
+          <div class="lab"><span>KrishiLink, after 1.5% fee</span><span id="rKL">₹0</span></div>
+          <div class="bar"><i id="bKL" style="background:var(--paddy)"></i></div>
+        </div>
+        <div class="gain" id="rGain">+₹0</div>
+        <div class="gain-lab">more in your pocket on this lot, based on the average premium over the last 90 days</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trust" class="market">
+    <div class="wrap">
+      <div class="sec-head"><h2>Built so neither side gets cheated</h2></div>
+      <div class="trust">
+        <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Every buyer is verified</h3><p>GST, PAN and bank account checked before a buyer can bid. Buyers who back out lose their bidding rights.</p></div>
+        <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg>Money held in escrow</h3><p>The buyer's payment is locked before your truck leaves. You never chase a cheque.</p></div>
+        <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/></svg>Independent grading</h3><p>Moisture, foreign matter and grain size are tested by a third-party assayer. The report is shared with both sides.</p></div>
+        <div><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>Pickup from your village</h3><p>Partner transporters collect from the farm gate. Weight is recorded on a calibrated scale in front of you.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join">
+    <div class="wrap roles">
+      <div class="role farmer">
+        <h3>For farmers and FPOs <span class="deva" style="font-size:.6em;opacity:.85">किसानों के लिए</span></h3>
+        <ul>
+          <li>Free to list, 1.5% fee only when you sell</li>
+          <li>App in Hindi, Punjabi, Marathi and Kannada</li>
+          <li>Missed-call listing for basic phones</li>
+        </ul>
+        <button class="btn" data-open="farmer">List my crop</button>
+      </div>
+      <div class="role buyer">
+        <h3>For mills, exporters and retailers</h3>
+        <ul>
+          <li>Graded lots with lab reports before you bid</li>
+          <li>Source direct from 30,000+ farmers and FPOs</li>
+          <li>GST invoices and e-way bills generated for you</li>
+        </ul>
+        <button class="btn" data-open="buyer">Register as a buyer</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 KrishiLink. Farm-to-business marketplace.</span>
+    <span>Helpline 1800-000-0000, 7 am to 9 pm</span>
+  </div>
+</footer>
+
+<dialog id="bidDlg" aria-labelledby="bidTitle">
+  <form class="dlg" method="dialog" id="bidForm">
+    <h3 id="bidTitle">Place a bid</h3>
+    <p id="bidInfo"></p>
+    <div class="field">
+      <label for="bidAmt">Your bid, ₹ per quintal</label>
+      <input id="bidAmt" type="number" inputmode="numeric" required>
+    </div>
+    <div class="err" id="bidErr" role="alert"></div>
+    <div class="row">
+      <button class="btn btn-ghost" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn btn-primary" id="bidSubmit" value="ok">Place bid</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="joinDlg" aria-labelledby="joinTitle">
+  <form class="dlg" method="dialog" id="joinForm">
+    <h3 id="joinTitle">List my crop</h3>
+    <p id="joinInfo">We'll call you back within 2 hours to set up your first lot.</p>
+    <div class="field" style="margin-bottom:1rem">
+      <label for="jName">Name</label>
+      <input id="jName" type="text" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="jPhone">Mobile number</label>
+      <input id="jPhone" type="tel" inputmode="numeric" placeholder="10 digits" autocomplete="tel">
+    </div>
+    <div class="err" id="joinErr" role="alert"></div>
+    <div class="row">
+      <button class="btn btn-ghost" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn btn-primary" id="joinSubmit" value="ok">Request a call</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const fmt = n => "₹" + Math.round(n).toLocaleString("en-IN");
+const buyers = ["Shree Balaji Flour Mills","Agrawal Exports","Nature's Basket Sourcing","KRBL Procurement","Adani Wilmar Desk","Jain Dal Udyog","Vardhman Spinning","Reliance Fresh Sourcing","Patanjali Procurement","Bharat Rice Traders"];
+
+const lots = [
+  {id:1,crop:"Wheat HD-2967",loc:"Karnal, Haryana",qty:42,grade:"A",mandi:2425,bid:2612,bids:14,ends:872,cat:"grain",inc:5},
+  {id:2,crop:"Basmati 1121 paddy",loc:"Kaithal, Haryana",qty:120,grade:"A",mandi:3780,bid:4015,bids:22,ends:3140,cat:"grain",inc:10},
+  {id:3,crop:"Mustard",loc:"Bharatpur, Rajasthan",qty:35,grade:"B+",mandi:5950,bid:6240,bids:9,ends:5420,cat:"pulse",inc:10},
+  {id:4,crop:"Chana (desi)",loc:"Indore, Madhya Pradesh",qty:60,grade:"A",mandi:5720,bid:6010,bids:11,ends:7800,cat:"pulse",inc:10},
+  {id:5,crop:"Cotton (kapas)",loc:"Sirsa, Haryana",qty:80,grade:"A",mandi:7150,bid:7560,bids:17,ends:2210,cat:"cash",inc:10},
+  {id:6,crop:"Red onion",loc:"Lasalgaon, Maharashtra",qty:150,grade:"B",mandi:1780,bid:1935,bids:26,ends:1330,cat:"cash",inc:5}
+];
+const feed = [];
+let filter = "all";
+
+function t(s){ if(s<=0) return "Closed"; const h=Math.floor(s/3600), m=Math.floor(s%3600/60), sec=s%60; return h? `${h}h ${String(m).padStart(2,"0")}m` : `${m}:${String(sec).padStart(2,"0")}`; }
+function clock(){ return new Date().toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}); }
+
+function renderLots(){
+  const tb = document.getElementById("lots");
+  tb.innerHTML = lots.filter(l=>filter==="all"||l.cat===filter).map(l=>{
+    const up = ((l.bid-l.mandi)/l.mandi*100).toFixed(1);
+    return `<tr data-id="${l.id}">
+      <td class="crop"><b>${l.crop}</b><span>${l.loc}</span></td>
+      <td>${l.qty} qtl</td>
+      <td><span class="grade">${l.grade}</span></td>
+      <td>${fmt(l.mandi)}</td>
+      <td class="bid"><b>${fmt(l.bid)}</b> <span class="up">+${up}%</span></td>
+      <td>${l.bids}</td>
+      <td>${t(l.ends)}</td>
+      <td><button class="btn btn-ghost bidbtn" data-bid="${l.id}" ${l.ends<=0?"disabled":""}>Bid</button></td>
+    </tr>`;}).join("");
+}
+
+function renderHero(){
+  const l = lots[0];
+  document.getElementById("heroBid").textContent = fmt(l.bid);
+  document.getElementById("heroDiff").textContent = `+${((l.bid-l.mandi)/l.mandi*100).toFixed(1)}% for the farmer`;
+  document.getElementById("heroTimer").textContent = t(l.ends);
+  document.getElementById("heroFeed").innerHTML = feed.slice(0,4).map(f=>`<li><span>${f.who}</span><span class="t">${f.time}</span><span class="amt">${fmt(f.amt)}</span></li>`).join("");
+}
+
+function addBid(l, amt, who){
+  l.bid = amt; l.bids++;
+  if(l.id===1){
+    feed.unshift({who, amt, time:clock()});
+    const el = document.getElementById("heroBid");
+    el.classList.add("flash"); setTimeout(()=>el.classList.remove("flash"),300);
+  }
+  renderLots(); renderHero();
+  const row = document.querySelector(`tr[data-id="${l.id}"]`);
+  if(row) row.classList.add("bumped");
+}
+
+// seed hero feed
+[[2590,"Agrawal Exports"],[2598,"Patanjali Procurement"],[2605,"Bharat Rice Traders"],[2612,"Shree Balaji Flour Mills"]].forEach(([a,w],i)=>feed.unshift({who:w,amt:a,time:clock()}));
+
+setInterval(()=>{ lots.forEach(l=>{ if(l.ends>0) l.ends--; }); document.getElementById("heroTimer").textContent=t(lots[0].ends);
+  document.querySelectorAll("#lots tr").forEach(r=>{const l=lots.find(x=>x.id==r.dataset.id); r.children[6].textContent=t(l.ends);}); },1000);
+
+(function tick(){
+  setTimeout(()=>{
+    const open = lots.filter(l=>l.ends>0);
+    if(open.length){
+      const l = Math.random()<.45 ? lots[0] : open[Math.floor(Math.random()*open.length)];
+      const steps = 1+Math.floor(Math.random()*3);
+      addBid(l, l.bid + l.inc*steps, buyers[Math.floor(Math.random()*buyers.length)]);
+    }
+    tick();
+  }, 3200 + Math.random()*2800);
+})();
+
+// filters
+document.getElementById("filters").addEventListener("click", e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  filter = b.dataset.f;
+  document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", c===b));
+  renderLots();
+});
+
+// bidding
+const dlg = document.getElementById("bidDlg");
+let active = null;
+document.getElementById("lots").addEventListener("click", e=>{
+  const b = e.target.closest("[data-bid]"); if(!b) return;
+  active = lots.find(l=>l.id==b.dataset.bid);
+  document.getElementById("bidTitle").textContent = `Bid on ${active.crop}`;
+  document.getElementById("bidInfo").textContent = `${active.qty} quintal from ${active.loc}. Top bid is ${fmt(active.bid)}. Minimum raise is ₹${active.inc}.`;
+  const inp = document.getElementById("bidAmt");
+  inp.value = active.bid + active.inc; inp.min = active.bid + active.inc;
+  document.getElementById("bidErr").textContent = "";
+  dlg.showModal(); inp.select();
+});
+document.getElementById("bidSubmit").addEventListener("click", e=>{
+  e.preventDefault();
+  const v = Number(document.getElementById("bidAmt").value);
+  const min = active.bid + active.inc;
+  if(!v || v < min){ document.getElementById("bidErr").textContent = `Enter at least ${fmt(min)}. Another buyer may have raised the price.`; return; }
+  addBid(active, v, "You");
+  dlg.close();
+  toast(`Bid placed: ${fmt(v)} per quintal on ${active.crop}. You're the top bidder.`);
+});
+
+// join
+const jdlg = document.getElementById("joinDlg");
+document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>{
+  const buyer = b.dataset.open==="buyer";
+  document.getElementById("joinTitle").textContent = buyer ? "Register as a buyer" : "List my crop";
+  document.getElementById("joinInfo").textContent = buyer ? "Our buyer team will call to complete KYC. Keep your GSTIN handy." : "We'll call you back within 2 hours to set up your first lot.";
+  document.getElementById("joinErr").textContent = "";
+  jdlg.showModal();
+}));
+document.querySelectorAll('a[href="#join"]').forEach(a=>a.addEventListener("click",e=>{ e.preventDefault(); document.querySelector('[data-open="farmer"]').click(); }));
+document.getElementById("joinSubmit").addEventListener("click", e=>{
+  e.preventDefault();
+  const name = document.getElementById("jName").value.trim();
+  const ph = document.getElementById("jPhone").value.replace(/\D/g,"");
+  if(!name){ document.getElementById("joinErr").textContent="Add your name so we know who to ask for."; return; }
+  if(!/^[6-9]\d{9}$/.test(ph)){ document.getElementById("joinErr").textContent="Enter a 10-digit mobile number starting with 6, 7, 8 or 9."; return; }
+  jdlg.close(); toast(`Call requested. We'll ring ${ph.slice(0,5)} ${ph.slice(5)} shortly.`);
+});
+
+// calculator
+const calcCrops = [["Wheat",2425,.077],["Basmati paddy",3780,.062],["Mustard",5950,.049],["Chana",5720,.051],["Cotton",7150,.057],["Onion",1780,.087],["Soybean",4600,.055],["Maize",2150,.071]];
+const sel = document.getElementById("cCrop");
+sel.innerHTML = calcCrops.map((c,i)=>`<option value="${i}">${c[0]} (mandi ${fmt(c[1])}/qtl)</option>`).join("");
+function calc(){
+  const [ , mandi, prem] = calcCrops[sel.value];
+  const q = Math.max(0, Math.min(5000, Number(document.getElementById("cQty").value)||0));
+  const m = mandi*q*(1-0.025);          // arhtiya commission ~2.5%
+  const k = mandi*(1+prem)*q*(1-0.015); // KrishiLink fee 1.5%
+  document.getElementById("rMandi").textContent = fmt(m);
+  document.getElementById("rKL").textContent = fmt(k);
+  const max = Math.max(m,k)||1;
+  document.getElementById("bMandi").style.width = (m/max*100)+"%";
+  document.getElementById("bKL").style.width = (k/max*100)+"%";
+  document.getElementById("rGain").textContent = "+" + fmt(k-m);
+}
+sel.addEventListener("change",calc); document.getElementById("cQty").addEventListener("input",calc);
+
+// theme
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const r=document.documentElement;
+  const dark = r.dataset.theme ? r.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark ? "light" : "dark";
+  try{ localStorage.setItem("kl-theme", r.dataset.theme); }catch(e){}
+});
+try{ const s=localStorage.getItem("kl-theme"); if(s) document.documentElement.dataset.theme=s; }catch(e){}
+
+let toastT;
+function toast(msg){ const el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove("show"),3800); }
+
+renderLots(); renderHero(); calc();
+</script>
+</body>
 </html>
